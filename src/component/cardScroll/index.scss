@@ -1,0 +1,69 @@
+.cardScroll-container {
+  width: 100%;
+  overflow: hidden;
+  touch-action: none;
+}
+
+.cardScroll-wrapper {
+  display: flex;
+  touch-action: none;
+}
+
+.right-tip-wrapper {
+  flex: 0 0;
+  display: flex;
+  div {
+    color: #fff;
+    width: 60px;
+    box-sizing: border-box;
+    padding: 10px;
+    height: 100%;
+    background: skyblue;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &:first-child {
+      background: #ddd;
+    }
+    &:nth-of-type(2) {
+      background: red;
+    }
+  }
+}
+
+.left-tip-wrapper {
+  flex: 0 0 80px;
+  div {
+    color: #fff;
+    box-sizing: border-box;
+    padding: 10px;
+    height: 100%;
+    background: skyblue;
+    display: flex;
+    text-align: center;
+    align-items: center;
+  }
+}
+
+.cardScroll {
+  display: flex;
+  width: 100%;
+  flex: 0 0 100%;
+  border-bottom: 1px solid #ddd;
+  align-items: center;
+  padding: 0 20px;
+  box-sizing: border-box;
+  img {
+    width: 50px;
+    height: 50px;
+    flex: 0 0 50px;
+    margin-right: 20px;
+  }
+  .card-right {
+    flex: 1;
+  }
+  .item {
+    display: flex;
+    justify-content: space-between;
+  }
+}
