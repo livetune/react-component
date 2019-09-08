@@ -61,6 +61,11 @@
   }
   .card-right {
     flex: 1;
+
+    p {
+      margin: 8px 0;
+      padding: 0;
+    }
   }
   .item {
     display: flex;

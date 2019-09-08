@@ -1,0 +1,23 @@
+.card-scroll-warpper {
+  width: 100%;
+  touch-action: none;
+  overflow: hidden;
+}
+
+.card-wapper {
+  display: flex;
+  &.back-transition {
+    transition: all 0.4s;
+  }
+  .card-button-list {
+    button {
+      height: 100%;
+      width: 5em;
+      background: skyblue;
+      color: #ffffff;
+      outline: none;
+      border: none;
+    }
+    display: flex;
+  }
+}
