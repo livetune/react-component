@@ -44,14 +44,17 @@ export default CardSlidePage;
 
 ### Props
 属性 | 说明 | 类型 | 默认值 
----|---|---|---|---
+---|---|---|---
 renderList | 传入一个组件的数组，用来渲染每一条卡片的内容。 | Array | [ ]
 leftButtons | 左侧按钮集合 | Array | [ ]
 rightButtons | 右侧按钮集合 | Array | [ ]
 
+---
+
 Buttons
+
 属性 | 说明 | 类型  
----|---|---|---
-onClick | 按钮的点击事件 | (item, index, e) => void 
+---|---|---
+onClick | 按钮的点击事件 | (item, index, e) => void 
 style | 按钮样式 | Object 
 label | 按钮的文字 | String 
