@@ -4,12 +4,7 @@ import image from './user.svg';
 import PropTypes from 'prop-types'
 
 function TestCard(props) {
-  // const [move, setMove] = useState(0)
-  // const [moveStart, setMoveStart] = useState(0)
-  // const [distance, setDistance] = useState(0)
-  // const [rightOpen, setRightOpen] = useState(false)
-
-  return <div className="cardScroll">
+  return <div className="card-slide">
     <img src={image} alt="" />
     <div className="card-right">
       <p className="item">

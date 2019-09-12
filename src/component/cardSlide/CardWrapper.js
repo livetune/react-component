@@ -1,13 +1,15 @@
-import React, { useRef, useEffect, useState } from 'react'
+import React, { useRef, useEffect, useState, useContext } from 'react'
+import PropTypes from 'prop-types'
+import context from './CardContext'
 
-
-function CardWapper(props) {
+function CardWapper(props = { leftButtons: [] }) {
   const [distance, setDistance] = useState(0)
   const [inTouch, setInTouch] = useState(false)
   const [touchPos, setTouchPos] = useState(0)
   const scrollRef = useRef(null)
   const leftRef = useRef(null)
   const rightRef = useRef(null)
+  const ctx = useContext(context)
   const getLeft = () => leftRef.current.clientWidth * -1
 
   useEffect(() => {
@@ -20,7 +22,7 @@ function CardWapper(props) {
   })
 
   function back() {
-    console.log(distance)
+    // console.log(distance)
     if (distance === getLeft()) {
       return
     }
@@ -44,7 +46,7 @@ function CardWapper(props) {
       return
     }
     if (distance > left * 0.5) {
-      console.log('归位')
+      // console.log('归位')
       setDistance(0)
     } else if (distance < left - 0.5 * rightRef.current.clientWidth) {
       setDistance(rightBord)
@@ -79,19 +81,38 @@ function CardWapper(props) {
     }
   }
 
+
   return <div className="card-wapper" ref={scrollRef} style={{ transform: `translateX(${distance}px)` }} onTouchStart={touchStart} onTouchMove={touchMove} onTouchEnd={touchEnd} onTransitionEnd={transitionEnd}>
     <div className="card-button-list" style={{ display: 'none' }} ref={leftRef}>
-      <button>标记为未读</button>
+      {
+        ctx.leftButtons.map((item, index) =>
+          <button style={item.style}
+            onClick={e => item.onClick && item.onClick(item, props.cardIndex, e)}
+            key={index}
+          >
+            {item.label}
+          </button>)
+      }
     </div>
     {props.item}
     <div className="card-button-list" ref={rightRef}>
-      <button>删除</button>
-      <button onClick={e => {
-        alert('更多')
-        back()
-      }}>更多</button>
+      {
+        ctx.rightButtons.map((item, index) =>
+          <button style={item.style}
+            onClick={e => item.onClick && item.onClick(item, props.cardIndex, e)}
+            key={index}
+          >
+            {item.label}
+          </button>)
+      }
     </div>
   </div>
 }
-
+CardWapper.propTypes = {
+  backAll: PropTypes.func,
+  subscribeBackAll: PropTypes.func,
+  unsubscribeBackAll: PropTypes.func,
+  cardIndex: PropTypes.any,
+  item: PropTypes.element,
+}
 export default CardWapper
