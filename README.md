@@ -1,5 +1,11 @@
 # React component
 ---
+## Run
+```cmd
+npm install
+npm start
+```
+
 ## CardSlide
 
 列表可左滑以及右滑的组件，类似 QQ 或者微信的聊天列表
