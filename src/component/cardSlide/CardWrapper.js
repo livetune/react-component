@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState, useContext } from 'react'
+import React, { useRef, useEffect, useState, useContext, useCallback } from 'react'
 import PropTypes from 'prop-types'
 import context from './CardContext'
 
@@ -21,25 +21,23 @@ function CardWapper(props = { leftButtons: [] }) {
     return () => props.unsubscribeBackAll(back)
   })
 
-  function back() {
-    // console.log(distance)
+
+  const back = useCallback(() => {
     if (distance === getLeft()) {
       return
     }
     scrollRef.current.classList.add('back-transition')
     setDistance(getLeft())
-  }
+  }, [distance])
 
-  function touchStart(e) {
+  const touchStart = useCallback(e => {
     setTouchPos(e.targetTouches[0].pageX)
     setInTouch(true)
-  }
+  }, [distance])
 
-  function touchEnd(e) {
+  const touchEnd = useCallback(() => {
     setInTouch(false)
-    // console.log(distance)
     const rightBord = getLeft() - rightRef.current.clientWidth // transform 可位移的最大距离
-
     // 左边自动归位    
     const left = getLeft()
     if (distance === left) {
@@ -55,13 +53,14 @@ function CardWapper(props = { leftButtons: [] }) {
     }
     // 注册一个回位事件
     props.backAll()
-  }
+  })
 
-  function transitionEnd(e) {
+
+  const transitionEnd = useCallback(() => {
     scrollRef.current.classList.remove('back-transition')
-  }
+  }, [])
 
-  function setWapperDistance(moveDis) {
+  const setWapperDistance = useCallback((moveDis) => {
     const rightBord = getLeft() - rightRef.current.clientWidth // transform 可位移的最大距离
     const dis = distance - touchPos + moveDis
     if (dis >= 0) {
@@ -72,14 +71,14 @@ function CardWapper(props = { leftButtons: [] }) {
       setDistance(dis)
     }
     setTouchPos(moveDis)
-  }
+  }, [distance, touchPos])
 
-  function touchMove(e) {
+  const touchMove = useCallback((e) => {
     e.stopPropagation()
     if (inTouch) {
       setWapperDistance(e.targetTouches[0].pageX)
     }
-  }
+  })
 
 
   return <div className="card-wapper" ref={scrollRef} style={{ transform: `translateX(${distance}px)` }} onTouchStart={touchStart} onTouchMove={touchMove} onTouchEnd={touchEnd} onTransitionEnd={transitionEnd}>
