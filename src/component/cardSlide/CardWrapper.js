@@ -13,14 +13,11 @@ function CardWapper(props = { leftButtons: [] }) {
   const getLeft = () => leftRef.current.clientWidth * -1
 
   useEffect(() => {
+    props.subscribeBackAll(back)
     leftRef.current.style.display = ''
     setDistance(getLeft())
-  }, [])
-  useEffect(() => {
-    props.subscribeBackAll(back)
     return () => props.unsubscribeBackAll(back)
-  })
-
+  }, [])
 
   const back = useCallback(() => {
     if (distance === getLeft()) {
@@ -79,7 +76,6 @@ function CardWapper(props = { leftButtons: [] }) {
       setWapperDistance(e.targetTouches[0].pageX)
     }
   })
-
 
   return <div className="card-wapper" ref={scrollRef} style={{ transform: `translateX(${distance}px)` }} onTouchStart={touchStart} onTouchMove={touchMove} onTouchEnd={touchEnd} onTransitionEnd={transitionEnd}>
     <div className="card-button-list" style={{ display: 'none' }} ref={leftRef}>
