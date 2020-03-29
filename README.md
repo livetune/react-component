@@ -1,5 +1,6 @@
 # React component
 ---
+[预览](https://livetune.github.io/react-component)
 ## Run
 ```cmd
 npm install
